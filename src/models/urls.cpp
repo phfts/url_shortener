@@ -10,7 +10,6 @@ public:
             std::cout << "Redirecting to google.com" << std::endl;
             return "http://www.google.com";
         }
-
         std::cout << "Could not find hash" << std::endl;
         return nullptr; 
     }
