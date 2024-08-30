@@ -4,7 +4,7 @@
 
 #include "./controllers/urls_controller_tests.cpp"
 #include "./helpers/hash_helper.cpp"
-#include "./repository/memory_kv_store.cpp"
+#include "./models/urls.cpp"
 #include "./repository/document_store.cpp"
 
 int main(int argc, char **argv) {

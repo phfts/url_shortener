@@ -33,7 +33,7 @@ TEST(UrlsController, getFound)
     KVStore* store = new MemoryKvStore();
     Urls *urls = new Urls(store);
     auto controller = UrlsController(urls);
-    crow::response res = controller.create(req);
+    auto res = controller.create(req);
 
     auto x = crow::json::load(res.body);
     auto newUrl = x["url"].s();
@@ -47,6 +47,6 @@ TEST(UrlsController, getNotFound)
     KVStore* store = new MemoryKvStore();
     Urls *urls = new Urls(store);
     auto controller = UrlsController(urls);
-    crow::response res = controller.get("1234");
+    auto res = controller.get("1234");
     EXPECT_EQ(404, res.code);
 }

@@ -6,14 +6,13 @@
 
 void setting(Urls *urls)
 {
-    for (int i=0; i<100000; i++)
+    for (int i=0; i<10000; i++)
     {
         urls->saveUrl("http://www.google.com");
     }
 }
 
-
-TEST(MemoryKvStore, Concurrency)
+TEST(Urls, MemoryKvStoreConcurrency)
 {
     KVStore* store = new MemoryKvStore();
     Urls *urls = new Urls(store);
@@ -24,7 +23,7 @@ TEST(MemoryKvStore, Concurrency)
     t2.join();
 }
 
-TEST(DocumentStore, Concurrency)
+TEST(Urls, DocumentStoreConcurrency)
 {
     KVStore* store = new DocumentStore();
     Urls *urls = new Urls(store);

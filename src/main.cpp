@@ -26,5 +26,6 @@ int main()
         CROW_LOG_ERROR << "Error running server" << e.what();
         return 1;
     }
+    
     return 0;
 }
