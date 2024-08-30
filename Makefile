@@ -1,4 +1,5 @@
-LD_LIBRARY_PATH=/usr/local/lib
+export LD_LIBRARY_PATH=/usr/local/lib
+
 INCLUDE_TEST = -I./lib/Crow/include -I/usr/local/include/mongocxx/v_noabi/ -I/usr/local/include/bsoncxx/v_noabi/
 LIBS_TEST = -lmongocxx -lbsoncxx
 INCLUDE = -I./lib/Crow/include

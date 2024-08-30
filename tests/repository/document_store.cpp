@@ -8,5 +8,5 @@ TEST(DocumentStore, Concurrency)
     std::string key = "123";
     std::string value = "4568";
     store->set(key, value);
-    EXPECT_EQ(nullptr, store->get(key));
+    EXPECT_EQ(value, *store->get(key));
 }
