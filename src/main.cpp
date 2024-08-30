@@ -3,13 +3,18 @@
 #include <string>
 #include "crow.h"
 #include "./controllers/urls_controller.cpp"
+#include "./repository/memory_kv_store.cpp"
 
 int main()
 {
     crow::SimpleApp app;
 
-    CROW_ROUTE(app, "/api/v1/").methods("POST"_method)(UrlsController::create);
-    CROW_ROUTE(app, "/api/v1/<string>")(UrlsController::get);
+    KVStore* store = new MemoryKvStore();
+    Urls *urls = new Urls(store);
+    auto controller = UrlsController(urls);
+
+    CROW_ROUTE(app, "/api/v1/").methods("POST"_method)([&controller](const crow::request& req) { return controller.create(req); } );
+    CROW_ROUTE(app, "/<string>")([&controller](std::string hash) { return controller.get(hash); } );
 
     app.port(8080).multithreaded().run();
 }
