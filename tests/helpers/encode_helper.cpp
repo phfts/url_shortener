@@ -4,7 +4,7 @@
 
 #include "../../src/helpers/encode_helper.cpp"
 
-TEST(A, A1)
+TEST(Encoding, toBase62)
 {
     EXPECT_EQ("a", toBase62(0, 1));
     EXPECT_EQ("b", toBase62(1, 1));

@@ -1,6 +1,11 @@
+#pragma once
+
 #include <map>
+#include <mutex>
 
 #include "./kv_store.hpp"
+
+std::mutex mtx;
 
 class MemoryKvStore : public KVStore {
 private:
@@ -11,12 +16,14 @@ public:
     {
         if (store.count(key) == 0) 
             return nullptr;
-            
+
         return &store[key];
     }
 
     void set(std::string key, std::string value) 
     {
+        mtx.lock();
         store[key] = value;
+        mtx.unlock();
     }    
 };
