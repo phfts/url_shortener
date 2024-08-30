@@ -1,8 +1,7 @@
 export LD_LIBRARY_PATH=/usr/local/lib
 
-INCLUDE_TEST = -I./lib/Crow/include -I/usr/local/include/mongocxx/v_noabi/ -I/usr/local/include/bsoncxx/v_noabi/
-LIBS_TEST = -lmongocxx -lbsoncxx
-INCLUDE = -I./lib/Crow/include
+INCLUDE = -I./lib/Crow/include -I/usr/local/include/mongocxx/v_noabi/ -I/usr/local/include/bsoncxx/v_noabi/
+LIBS = -lmongocxx -lbsoncxx
 CXX_STANDARD = c++17
 
 clean:
@@ -12,7 +11,7 @@ clean:
 
 build-test:
 	@echo "\nBuilding..."
-	g++ -O3 -std=${CXX_STANDARD} tests/main.cpp -o bin/test -g ${INCLUDE_TEST} ${LIBS_TEST} -lgtest
+	g++ -O3 -std=${CXX_STANDARD} tests/main.cpp -o bin/test -g ${INCLUDE} ${LIBS} -lgtest
 
 build-main:
 	@echo "\nBuilding..."

@@ -17,20 +17,24 @@ public:
     const char *findByHash(std::string hash)
     {
         std::cout << "Looking for hash " << hash << std::endl;
-        std::string *value = kvStore->get(hash);
-        if (value == nullptr)
+        if (!kvStore->has(hash))
         {
             std::cout << "Could not find hash" << std::endl;
             return nullptr;
         }
 
-        std::cout << "Redirecting to " << *value << std::endl;
-        return value->c_str();
+        std::string value = kvStore->get(hash);
+        std::cout << "Redirecting to " << value << std::endl;
+        return value.c_str();
     }
 
     std::string saveUrl(std::string url)
     {
         std::string hash = generateBase62HashV2(7);
+        while (kvStore->has(hash))
+        {
+            hash = generateBase62HashV2(7);
+        }
         kvStore->set(hash, url);
         return hash;
     }

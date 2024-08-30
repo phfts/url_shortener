@@ -3,13 +3,13 @@
 #include "crow.h"
 
 #include "./controllers/urls_controller.cpp"
-#include "./repository/memory_kv_store.cpp"
+#include "./repository/document_store.cpp"
 
 int main()
 {
     crow::SimpleApp app;
 
-    KVStore* store = new MemoryKvStore();
+    KVStore* store = new DocumentStore();
     Urls *urls = new Urls(store);
     auto controller = UrlsController(urls);
 
