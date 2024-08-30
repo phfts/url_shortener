@@ -2,6 +2,7 @@
 #include "crow.h"
 
 #include "../models/urls.cpp"
+#include "../repository/document_store.cpp"
 
 class UrlsController {
 private:
@@ -9,6 +10,13 @@ private:
 
 public:
     UrlsController(Urls* urls) : urls(urls) {}
+
+    static UrlsController* factory()
+    {
+        KVStore* store = new DocumentStore();
+        Urls *urls = new Urls(store);
+        return new UrlsController(urls);
+    }
 
     crow::response get(std::string hash){
         const char* url = urls->findByHash(hash);

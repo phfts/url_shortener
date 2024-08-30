@@ -28,9 +28,12 @@ private:
     void setupIndex()
     {
         auto index_specification = make_document(kvp("hash", 1));
+        mongocxx::options::index index_options{};
+        index_options.unique(true);
+
         auto conn = pool.acquire();
         auto collection = (*conn)[db][col];
-        collection.create_index(std::move(index_specification));
+        collection.create_index(std::move(index_specification), index_options);
     }
 
 public:

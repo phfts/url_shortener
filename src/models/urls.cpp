@@ -10,6 +10,20 @@ class Urls
 {
 private:
     KVStore* kvStore;
+    
+    std::string trySaveUrl(std::string url, int count = 0)
+    {
+        try
+        {
+            std::string hash = generateBase62HashV2(7);
+            kvStore->set(hash, url);
+            return hash;
+        }
+        catch(const std::exception& e)
+        {
+            return "";
+        }
+    }
 
 public:
     Urls(KVStore* kvStore) : kvStore(kvStore) {}
@@ -30,12 +44,15 @@ public:
 
     std::string saveUrl(std::string url)
     {
-        std::string hash = generateBase62HashV2(7);
-        while (kvStore->has(hash))
+        std::string hash = "";
+        for (int i=0; i<5;i++)
         {
-            hash = generateBase62HashV2(7);
+            hash = trySaveUrl(url, i);
+            if (hash != "") break;
         }
-        kvStore->set(hash, url);
+        if (hash == "") {
+            throw std::runtime_error("Error saving url after max retries. Url was " + url);
+        }
         return hash;
     }
 };
