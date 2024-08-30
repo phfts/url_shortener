@@ -1,16 +1,35 @@
 #include <string>
 #include <iostream>
 
-class Urls {
+#include "../repository/kv_store.hpp"
+#include "../helpers/hash_helper.cpp"
+
+class Urls
+{
+private:
+    KVStore* kvStore;
+
 public:
-    static const char* findByHash(std::string hash)
+    Urls(KVStore* kvStore) : kvStore(kvStore) {}
+
+    const char *findByHash(std::string hash)
     {
-        std::cout << "Looking for hash" << hash << std::endl;
-        if (hash == "123") {
-            std::cout << "Redirecting to google.com" << std::endl;
-            return "http://www.google.com";
+        std::cout << "Looking for hash " << hash << std::endl;
+        std::string *value = kvStore->get(hash);
+        if (value == nullptr)
+        {
+            std::cout << "Could not find hash" << std::endl;
+            return nullptr;
         }
-        std::cout << "Could not find hash" << std::endl;
-        return nullptr; 
+
+        std::cout << "Redirecting to " << *value << std::endl;
+        return value->c_str();
+    }
+
+    std::string saveUrl(std::string url)
+    {
+        std::string hash = generateBase62Hash(7);
+        kvStore->set(hash, url);
+        return hash;
     }
 };

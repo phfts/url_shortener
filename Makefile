@@ -16,3 +16,10 @@ test: clean
 
 	@echo "\nRunning tests..."
 	bin/test
+
+debug: clean
+	@echo "\nCompiling..."
+	g++ -std=c++17 tests/main.cpp -o bin/test -g -I./lib/Crow/include -lgtest
+
+	@echo "\nRunning tests in debug mode..."
+	gdb bin/test

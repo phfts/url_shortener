@@ -1,10 +1,9 @@
+#define CROW_USE_BOOST 1
+
 #include <gtest/gtest.h>
 
-TEST(TestClass, TestCase)
-{
-    EXPECT_EQ(1,2);
-}
-
+#include "./controllers/urls_controller_tests.cpp"
+#include "./helpers/hash_helper.cpp"
 
 int main(int argc, char **argv) {
   testing::InitGoogleTest(&argc, argv);
