@@ -25,6 +25,9 @@ test: clean build-test
 	@echo "\nRunning tests..."
 	bin/test
 
+load-test:
+	ab -n 50000 -c 1000 -p tests/files/post_data.txt localhost:8080/api/v1/
+
 debug: clean build-test
 	@echo "\nRunning tests in debug mode..."
 	gdb bin/test
