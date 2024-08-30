@@ -5,10 +5,9 @@
 
 #include "./kv_store.hpp"
 
-std::mutex mtx;
-
 class MemoryKvStore : public KVStore {
 private:
+    std::mutex mtx;
     std::map<std::string, std::string> store;
 
 public:
