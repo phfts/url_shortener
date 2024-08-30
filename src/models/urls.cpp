@@ -28,7 +28,7 @@ public:
 
     std::string saveUrl(std::string url)
     {
-        std::string hash = generateBase62Hash(7);
+        std::string hash = generateBase62HashV2(7);
         kvStore->set(hash, url);
         return hash;
     }
