@@ -19,8 +19,8 @@ public:
     }
 
     crow::response get(std::string hash){
-        const char* url = urls->findByHash(hash);
-        if (url == nullptr)
+        std::string url = urls->findByHash(hash);
+        if (url == "")
             return crow::response(404);
 
         crow::response res(301);

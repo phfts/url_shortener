@@ -28,7 +28,7 @@ private:
 public:
     Urls(KVStore* kvStore) : kvStore(kvStore) {}
 
-    const char *findByHash(std::string hash)
+    std::string findByHash(std::string hash)
     {
         std::cout << "Looking for hash " << hash << std::endl;
         if (!kvStore->has(hash))
