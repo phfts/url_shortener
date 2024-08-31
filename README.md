@@ -23,8 +23,8 @@ $ make load-test
 1. Observability
 2. Creating a frontend
 3. Using docker/k8s to scale
-4. Billing
-5. Optimize performance
-6. Create expiry settings (e.g.: per time, per use)
-7. Add analytics capabilities
-8. Enhace libs dependency install and update workflow 
+4. User, accounts and billing
+5. Create expiry policies for free and paying users (e.g.: per time, per use)
+6. Add analytics capabilities for paying users
+7. Enhace libs dependency install and update workflow
+8. Optimize performance
