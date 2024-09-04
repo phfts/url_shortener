@@ -16,7 +16,7 @@ using bsoncxx::builder::basic::make_document;
 #include "./kv_store.hpp"
 
 mongocxx::instance inst{};
-mongocxx::pool pool = mongocxx::pool{mongocxx::uri{"mongodb://172.25.48.1:27017"}};
+mongocxx::pool pool = mongocxx::pool{mongocxx::uri{"mongodb://localhost:27017"}};
 
 class DocumentStore : public KVStore
 {
