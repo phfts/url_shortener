@@ -34,7 +34,7 @@ public:
         if (!kvStore->has(hash))
         {
             std::cout << "Could not find hash" << std::endl;
-            return nullptr;
+            return "";
         }
 
         std::string value = kvStore->get(hash);
