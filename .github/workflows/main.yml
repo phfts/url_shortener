@@ -1,0 +1,35 @@
+name: C/C++ CI
+on:
+  - push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: setup deps
+      run: |
+        sudo apt-get install libgtest-dev libboost-all-dev
+        git submodule update --init --recursive
+        # git submodule update --recursive
+    
+    - name: Start MongoDB
+      uses: supercharge/mongodb-github-action@1.11.0    
+
+    - name: setup mongo cxx driver
+      run: |
+        curl -OL https://github.com/mongodb/mongo-cxx-driver/releases/download/r3.10.1/mongo-cxx-driver-r3.10.1.tar.gz
+        tar -xzf mongo-cxx-driver-r3.10.1.tar.gz
+        cd mongo-cxx-driver-r3.10.1/build
+        cmake ..                                            \
+            -DCMAKE_BUILD_TYPE=Release                      \
+            -DBSONCXX_POLY_USE_BOOST=1                      \
+            -DMONGOCXX_OVERRIDE_DEFAULT_INSTALL_PREFIX=OFF
+        cmake --build .
+        sudo cmake --build . --target install
+        
+    - name: test
+      run: make test
+      
+    - name: load-test
+      run: make load-test
